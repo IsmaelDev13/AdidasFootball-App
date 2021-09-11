@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import DefenderPlayers from "./DefenderPlayers";
+import { useSelector } from "react-redux";
+import { selectPlayers } from "../slices/playerSlice";
+import FinalTeam from "./FinalTeam";
 
 function TeamSelected({ id, name, imageUrl, year }) {
+  const players = useSelector(selectPlayers);
+  console.log(players);
   const [uniqueTeams, setUniqueTeams] = useState([]);
   console.log(uniqueTeams);
   useEffect(() => {
@@ -26,42 +32,26 @@ function TeamSelected({ id, name, imageUrl, year }) {
         <p>{year}</p>
       </div>
       <div>
-        <select onSl name="team" id="">
-          {uniqueTeams
-            .filter((e) => e.position == "Defender")
-            .map(({ id, name }) => (
-              <option key={id} value={id}>
-                {name}
-              </option>
-            ))}
-        </select>
-        <select onSl name="team" id="">
-          {uniqueTeams
-            .filter((e) => e.position == "Midfielder")
-            .map(({ id, name }) => (
-              <option key={id} value={id}>
-                {name}
-              </option>
-            ))}
-        </select>
-        <select onSl name="team" id="">
-          {uniqueTeams
-            .filter((e) => e.position == "Goalkeeper")
-            .map(({ id, name }) => (
-              <option key={id} value={id}>
-                {name}
-              </option>
-            ))}
-        </select>
-        <select onSl name="team" id="">
-          {uniqueTeams
-            .filter((e) => e.position == "Attacker")
-            .map(({ id, name }) => (
-              <option key={id} value={id}>
-                {name}
-              </option>
-            ))}
-        </select>
+        {uniqueTeams
+          .filter((e) => e.position == "Defender")
+          .map(({ id, name, nationality }) => (
+            <DefenderPlayers
+              key={id}
+              id={id}
+              name={name}
+              country={nationality}
+            />
+          ))}
+      </div>
+      <div>
+        {players.map((player) => (
+          <FinalTeam
+            key={player.id}
+            id={player.id}
+            name={player.name}
+            country={player.country}
+          />
+        ))}
       </div>
     </div>
   );
