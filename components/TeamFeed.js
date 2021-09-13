@@ -34,15 +34,3 @@ function TeamFeed({ id, name, imageUrl, year }) {
 }
 
 export default TeamFeed;
-// export async function getServerSideProps(context) {
-//   const teams = await fetch("https://api.football-data.org/v2/teams/{id}", {
-//     method: "GET",
-//     headers: { "X-Auth-Token": "9ce7d2cc680e4834a6f05f2d9ddb02c2" },
-//   }).then((res) => res.json());
-
-//   return {
-//     props: {
-//       teams,
-//     },
-//   };
-// }

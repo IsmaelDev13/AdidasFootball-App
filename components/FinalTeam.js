@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectPlayers } from "../slices/playerSlice";
 
-function FinalTeam({ id, name, country }) {
+function FinalTeam({ id, name, country, position }) {
+  // const [goalKepper, setGoalkeeper] = useState([]);
+  // const players = useSelector(selectPlayers);
+
+  // console.log(players);
+  // useEffect(() => {
+  //   const goalKeppers = players
+  //     // .map((player) => player.position)
+  //     .filter((player) => player.position == "Goalkeeper");
+  //   setGoalkeeper(goalKeppers);
+  // }, []);
+
   return (
     <div>
-      <h1 className="text-2xl font-bold">Defenders</h1>
-      <h2>{country}</h2>
-      <p>{name}</p>
+      <div className="flex items-center space-x-2">
+        <p>
+          {name}
+          <br />{" "}
+        </p>
+        <span className="text-xs">Position: </span>
+        <p>{position}</p>
+      </div>
+      <div></div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { getSession } from "next-auth/client";
 import Head from "next/head";
 import Header from "../components/Header";
 import TeamFeed from "../components/TeamFeed";
@@ -26,6 +27,7 @@ export default function Home({ teams }) {
   );
 }
 export async function getServerSideProps(context) {
+  const session = await getSession(context);
   const teams = await fetch(
     "https://api.football-data.org/v2/competitions/2000/teams",
     {
@@ -37,6 +39,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       teams,
+      session,
     },
   };
 }

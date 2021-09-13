@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import TeamSelected from "../components/TeamSelected";
+import { addPlayer } from "../slices/playerSlice";
 
 import { selectTeams } from "../slices/teamSlice";
 
 function Team({ uniqueTeam }) {
   const teams = useSelector(selectTeams);
+  const dispatch = useDispatch();
+  const [showTeam, setShowTeam] = useState(false);
+
+  // useEffect(() => {
+  //   dispatch(addPlayer(players));
+  // }, [players]);
 
   return (
     <div>
-      <Header />
+      <Header setShowTeam={setShowTeam} showTeam={showTeam} />
       <div>
-        <h1>Your Teams</h1>
+        <h1 className="text-center uppercase font-sans text-3xl font-extrabold p-5 shadow-md">
+          {" "}
+          {teams.length === 0
+            ? "You have selected no teams..."
+            : "Teams Selection"}
+        </h1>
         {teams.map((team, i) => (
           <TeamSelected
             key={team.id}
@@ -20,6 +33,7 @@ function Team({ uniqueTeam }) {
             name={team.name}
             imageUrl={team.imageUrl}
             year={team.year}
+            setShowTeam={setShowTeam}
           />
         ))}
       </div>

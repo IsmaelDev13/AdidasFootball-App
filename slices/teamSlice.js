@@ -11,7 +11,22 @@ export const teamSlice = createSlice({
     addTeam: (state, action) => {
       state.teams = [...state.teams, action.payload];
     },
-    removeTeam: (state, action) => {},
+    removeTeam: (state, action) => {
+      const index = state.teams.findIndex(
+        (teamItem) => teamItem.id === action.payload.id
+      );
+
+      let newTeams = [...state.teams];
+
+      if (index >= 0) {
+        newTeams.splice(index, 1);
+      } else {
+        console.warn(
+          `Cant remove product (id:${action.payload.id}) as its not in the basket`
+        );
+      }
+      state.teams = newTeams;
+    },
   },
 });
 export const { addTeam, removeTeam } = teamSlice.actions;
