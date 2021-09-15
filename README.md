@@ -17,8 +17,10 @@ App using Next.js + Redux + tailwind CSS(Responsiveness).(Also: Three.js + WebGL
 
 ## Getting Started
 
+To make the installation:
+
 ```bash
-yarn
+yarn install
 ```
 
 Then, run the development server:
