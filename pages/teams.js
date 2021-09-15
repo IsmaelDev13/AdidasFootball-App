@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import SideTeam from "../components/SideTeam";
 import TeamSelected from "../components/TeamSelected";
 import { selectPlayers } from "../slices/playerSlice";
+import Head from "next/head";
 
 import { selectTeams } from "../slices/teamSlice";
 
@@ -16,6 +17,10 @@ function Team() {
 
   return (
     <div>
+      <Head>
+        <title>Adidas | Team Selection</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Header showTeam={showTeam} setShowTeam={setShowTeam} />
       <div>
         <h1 className="text-center uppercase font-sans text-3xl font-extrabold p-5 shadow-md">

@@ -4,7 +4,6 @@ import FinalAttacker from "./FinalAttacker";
 import FinalDeffenders from "./FinalDeffenders";
 import FinalGoalkeepers from "./FinalGoalkeepers";
 import FinalMidfielder from "./FinalMidfielder";
-import { CircleIcon, ArrowNarrowRightIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/outline";
 import { db } from "../firebase";
 import { useSession } from "next-auth/client";
@@ -23,7 +22,7 @@ function TeamCreated({ team, id }) {
 
   return (
     <>
-      <div className="flex items-center justify-evenly relative shadow-md ">
+      <div className="flex flex-col lg:flex-row items-center justify-evenly relative shadow-md ">
         <XIcon
           onClick={deleteTeam}
           className="h-10 absolute top-2 right-2 cursor-pointer"
@@ -43,7 +42,6 @@ function TeamCreated({ team, id }) {
         </div>
 
         <div className="p-5">
-          {/* <h1 className="text-2xl font-bold">Defenders</h1> */}
           {team
             .filter((e) => e.position == "Defender")
             .map((player) => (
@@ -56,7 +54,6 @@ function TeamCreated({ team, id }) {
             ))}
         </div>
         <div className=" p-5  ">
-          {/* <h1 className="text-2xl font-bold">Goalkeepers</h1> */}
           {team
             .filter((e) => e.position == "Goalkeeper")
             .map((player) => (

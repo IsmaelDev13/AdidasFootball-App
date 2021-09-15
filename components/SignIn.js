@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowNarrowRightIcon, ArrowRightIcon } from "@heroicons/react/solid";
+import { ArrowNarrowRightIcon } from "@heroicons/react/solid";
 import { signIn, useSession } from "next-auth/client";
 
 function SignIn() {

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DefenderPlayers from "./DefenderPlayers";
-import { useSelector } from "react-redux";
-import { selectPlayers } from "../slices/playerSlice";
 import GoalkeeperPlayers from "./GoalkeeperPlayers";
 import MidfielderPlayers from "./MidfieldPlayers";
 import AttackerPlayers from "./AttackerPlayers";
@@ -10,10 +8,10 @@ import { XCircleIcon } from "@heroicons/react/outline";
 import { useDispatch } from "react-redux";
 import { removeTeam } from "../slices/teamSlice";
 import SideTeam from "./SideTeam";
+import ReactTooltip from "react-tooltip";
 
 function TeamSelected({ id, name, imageUrl, year, players }) {
-  // const players = useSelector(selectPlayers);
-  // console.log(players);
+
 
   const [uniqueTeams, setUniqueTeams] = useState([]);
   const dispatch = useDispatch();
@@ -35,9 +33,7 @@ function TeamSelected({ id, name, imageUrl, year, players }) {
       .catch((err) => console.error(err));
   }, []);
 
-  // useEffect(() => {
-  //   setUniqueTeams(players);
-  // }, []);
+  
   return (
     <div className="flex flex-col lg:flex-row  items-center p-5 border-b-2 hover:shadow-xl overflow-x-hidden  space-x-10 relative  ">
       <img
@@ -45,7 +41,11 @@ function TeamSelected({ id, name, imageUrl, year, players }) {
         alt=""
         className="h-48 w-48 object-contain  border-2 shadow-md rounded-3xl bg-gray-50 transform transition-all duration-150 ease-in-out hover:animate-bounce "
       />
-      <div className="p-2">
+      <div
+        data-tip="Select a player from each National Team"
+        data-for="teamTooltip"
+        className="p-2"
+      >
         <p className="font-semibold">{name}</p>
         <p className="text-gray-500">{year}</p>
       </div>
@@ -117,6 +117,13 @@ function TeamSelected({ id, name, imageUrl, year, players }) {
           ))}
         <SideTeam />
       </div>
+      <ReactTooltip
+        place="right"
+        id="teamTooltip"
+        className="rounded-lg shadow-md"
+        backgroundColor="#1a1a2cee"
+        effect="solid"
+      />
     </div>
   );
 }

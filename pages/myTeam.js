@@ -1,31 +1,30 @@
-import { useSession } from "next-auth/client";
+import { getSession, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Header from "../components/Header";
 import TeamCreated from "../components/TeamCreated";
 import { db } from "../firebase";
+import Head from "next/head";
 
 function MyTeam() {
   const [session] = useSession();
   const router = useRouter();
   const [snapshot] = useCollection(
     db.collection("teams").doc(session?.user.email).collection("players")
-    // .orderBy("timestamp", "desc")
   );
 
   return (
     <div>
+      <Head>
+        <title>Adidas | My Team</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Header />
       <h1 className="text-4xl font-bold text-center p-4 shadow-md">My Team</h1>
       <div className="mx-20">
         {snapshot?.docs.map((doc) => (
-          <TeamCreated
-            key={doc.id}
-            id={doc.id}
-            team={doc.data().players}
-            // date={doc.data().timestamp}
-          />
+          <TeamCreated key={doc.id} id={doc.id} team={doc.data().players} />
         ))}
       </div>
 
@@ -45,3 +44,13 @@ function MyTeam() {
 }
 
 export default MyTeam;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  return {
+    props: {
+      session,
+    },
+  };
+}

@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { selectTeams } from "../slices/teamSlice";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/client";
-import SideTeam from "./SideTeam";
 import ReactTooltip from "react-tooltip";
 
 function Header({ showTeam, setShowTeam }) {
@@ -14,12 +13,12 @@ function Header({ showTeam, setShowTeam }) {
   return (
     <>
       <header className="sticky top-0 bg-white border-b z-50">
-        <div className="bg-black text-white flex items-center justify-evenly text-tiny flex-grow p-2 space-x-8 font-extrabold uppercase ">
+        <div className="hidden lg:flex bg-black text-white  items-center justify-evenly text-tiny flex-grow p-2 space-x-8 font-extrabold uppercase ">
           <h1 className="link ">Save on Stan Smith and Superstar Shoes</h1>
           <h2 className="link">Free Standard shipping & returns | Join now</h2>
           <h3 className="link">Now offering 3-day express delivery</h3>
         </div>
-        <div className="flex items-center justify-end space-x-6 py-2 text-gray-500 flex-grow font-thin text-supertiny pr-10 ">
+        <div className="hidden lg:flex items-center justify-end space-x-6 py-2 text-gray-500 flex-grow font-thin text-supertiny pr-10 ">
           <p className="link2">also visit</p>
           <p className="link2">help</p>
           <p className="link2">exchange & returns</p>

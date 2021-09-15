@@ -10,6 +10,7 @@ import {
 import { LUTPass } from "three/examples/jsm/postprocessing/LUTPass";
 import { LUTCubeLoader } from "three/examples/jsm/loaders/LUTCubeLoader";
 import { useRouter } from "next/dist/client/router";
+import Head from "next/head";
 
 extend({ LUTPass });
 
@@ -42,24 +43,22 @@ export default function App() {
 
   return (
     <div className="App relative">
-      <h1
+      <Head>
+        <title>Adidas | Football Match</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <img
         onClick={() => router.push("/")}
-        className="text-2xl p-5 cursor-pointer absolute top-0 bg-black hover:bg-gray-600 text-white m-2 rounded-lg shadow-lg z-50"
-      >
-        Football App
-      </h1>
+        className="absolute top-0 z-50 cursor-pointer h-28 w-28 object-contain left-4"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+        alt=""
+        loading="lazy"
+      />
       <Canvas
         frameloop="demand"
         dpr={[1, 2]}
         camera={{ position: [0, 0, 5], fov: 45 }}
       >
-        {/* <spotLight
-          intensity={0.5}
-          angle={0.2}
-          penumbra={1}
-          position={[5, 15, 10]}
-        /> */}
-        {/* <pointLight position={[-20, -5, -10]} color="red" intensity={0.8} /> */}
         <Suspense fallback={null}>
           <Sphere />
           <Grading />

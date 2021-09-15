@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Helvetica Neue", "-apple-system"],
+        sans: ["Helvetica Neue"],
       },
       fontSize: {
         tiny: ["11px"],

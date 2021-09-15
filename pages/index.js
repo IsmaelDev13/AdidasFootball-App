@@ -9,7 +9,6 @@ import SignIn from "../components/SignIn";
 import TeamFeed from "../components/TeamFeed";
 
 export default function Home({ teams }) {
-  // console.log(teams.teams);
   return (
     <div>
       <Head>

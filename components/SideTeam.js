@@ -32,12 +32,10 @@ function SideTeam({ setShowTeam, showTeam }) {
     setCountGoalkeepers(playerGoalkeepers.length - 1);
     setCountAttackers(playerAttackers.length - 1);
   };
+  
   const playersTotal = players.length;
-
   const playerDefenders = players.filter((e) => e.position == "Defender");
-
   const playerMidfielders = players.filter((e) => e.position == "Midfielder");
-
   const playerGoalkeepers = players.filter((e) => e.position == "Goalkeeper");
   const playerAttackers = players.filter((e) => e.position == "Attacker");
 
@@ -147,8 +145,7 @@ function SideTeam({ setShowTeam, showTeam }) {
                   session ? "Create Team" : "Register To Create Team"
                 }`}
                 data-for="headerTooltip"
-                // disabled={playerDefenders.length <= 4}
-                // disabled={!session}
+                
                 onClick={createTeam}
                 className={`${
                   session

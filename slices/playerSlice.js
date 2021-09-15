@@ -9,7 +9,6 @@ export const playerSlice = createSlice({
   initialState,
   reducers: {
     addPlayer: (state, action) => {
-      // state.players = [...state.players, action.payload];
       const index = state.players.findIndex(
         (playersItem) => playersItem.country == action.payload.country
       );
@@ -20,7 +19,6 @@ export const playerSlice = createSlice({
           `You cant select ${action.payload.name} because you have already selected a player from  ${action.payload.country}`
         );
       }
-      console.log(index);
     },
 
     removePlayer: (state, action) => {

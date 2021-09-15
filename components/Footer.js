@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 function Footer() {
-  const [showOptions, setShowOptions] = useState(false);
+  const [showOptions, setShowOptions] = useState(true);
 
   const showFooter = () => {
     if (window.innerWidth > 1026) {
