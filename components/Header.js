@@ -5,8 +5,9 @@ import { selectTeams } from "../slices/teamSlice";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/client";
 import SideTeam from "./SideTeam";
+import ReactTooltip from "react-tooltip";
 
-function Header({ setShowTeam, showTeam }) {
+function Header({ showTeam, setShowTeam }) {
   const teams = useSelector(selectTeams);
   const [session] = useSession();
   const router = useRouter();
@@ -27,7 +28,7 @@ function Header({ setShowTeam, showTeam }) {
           <p className="link2">creator club</p>
           <p className="link2">log in</p>
         </div>
-        <div className="flex items-center justify-between  ">
+        <div className="flex items-center justify-evenly">
           <div onClick={() => router.push("/")} className="px-5 cursor-pointer">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
@@ -35,7 +36,12 @@ function Header({ setShowTeam, showTeam }) {
               alt=""
             />
           </div>
-          <div onClick={!session ? signIn : signOut} className="right-0">
+          <div
+            data-tip={`${session ? "User" : "Register"}`}
+            data-for="headerTooltip"
+            onClick={!session ? signIn : signOut}
+            className="right-0"
+          >
             {session ? (
               <p className="font-serif font-bold cursor-pointer border-2 shadow-md p-3 rounded-lg  transform transition duration-200 hover:scale-90">
                 {session.user.name}
@@ -45,18 +51,41 @@ function Header({ setShowTeam, showTeam }) {
             )}
           </div>
           <div
+            data-tip="Teams Selection"
+            data-for="headerTooltip"
             onClick={() => router.push("/teams")}
             className="relative cursor-pointer shadow-md rounded-full "
           >
-            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-black text-center rounded-full text-white">
+            <span className="absolute top-4 right-0 h-4 w-4 bg-black text-center text-tiny rounded-full text-white">
               {teams.length}
             </span>
-            <GlobeIcon className="h-8 mr-10" />
-            <SearchIcon className="h-8 " onClick={() => setShowTeam(true)} />
+            <GlobeIcon className="h-8" />
+          </div>
+          <div className="flex items-center p-2 border-2 shadow-md rounded-md cursor-pointer">
+            <SearchIcon
+              data-tip="List of players"
+              data-for="headerTooltip"
+              onClick={() => setShowTeam(true)}
+              className="h-8 outline-none hover:text-gray-400"
+            />
+            <span
+              data-tip="Team Created"
+              data-for="headerTooltip"
+              onClick={() => router.push("/myTeam")}
+              className="px-2 up "
+            >
+              My Team
+            </span>
           </div>
         </div>
       </header>
-      {showTeam && <SideTeam setShowTeam={setShowTeam} />}
+      <ReactTooltip
+        place="right"
+        id="headerTooltip"
+        className="rounded-lg shadow-md"
+        backgroundColor="#1a1a2cee"
+        effect="solid"
+      />
     </>
   );
 }

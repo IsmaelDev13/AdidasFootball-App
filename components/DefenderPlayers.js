@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addPlayer, removePlayer } from "../slices/playerSlice";
 
-function DefenderPlayers({ id, name, country, position, setShowTeam }) {
+function DefenderPlayers({ id, name, country, position }) {
   const dispatch = useDispatch();
   const [added, setAdded] = useState(false);
   const selectPlayer = () => {
@@ -14,7 +14,6 @@ function DefenderPlayers({ id, name, country, position, setShowTeam }) {
     };
     dispatch(addPlayer(uniquePlayer));
 
-    setShowTeam(false);
     setAdded(true);
   };
   const unselectPlayer = () => {

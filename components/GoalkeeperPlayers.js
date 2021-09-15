@@ -24,7 +24,9 @@ function GoalkeeperPlayers({ id, name, country, position }) {
 
   return (
     <div className="flex items-center justify-between space-y-2">
-      <h1 className="font-semibold">{name}</h1>
+      <h1 className={`${
+            added && `bg-blue-500 text-white p-2 rounded-md`
+          } font-semibold`}>{name}</h1>
 
       {!added && (
         <button onClick={selectGoalkeeper} className="add">

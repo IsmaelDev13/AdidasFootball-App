@@ -34,7 +34,7 @@ export const playerSlice = createSlice({
         newPlayer.splice(index, 1);
       } else {
         console.warn(
-          `Cant remove product (id:${action.payload.id}) as its not in the basket`
+          `Cant remove player (id:${action.payload.id}) as its not in the team`
         );
       }
       state.players = newPlayer;

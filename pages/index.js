@@ -1,10 +1,15 @@
 import { getSession } from "next-auth/client";
 import Head from "next/head";
+import Banner from "../components/Banner";
+import FinalFooter from "../components/FinalFooter";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
+import LastFooter from "../components/LastFooter";
+import SignIn from "../components/SignIn";
 import TeamFeed from "../components/TeamFeed";
 
 export default function Home({ teams }) {
-  console.log(teams.teams);
+  // console.log(teams.teams);
   return (
     <div>
       <Head>
@@ -13,7 +18,7 @@ export default function Home({ teams }) {
       </Head>
       <Header />
       <main className="max-w-screen-2xl mx-auto grid  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {teams.teams.map(({ id, name, crestUrl, founded }) => (
+        {teams.teams?.map(({ id, name, crestUrl, founded }) => (
           <TeamFeed
             key={id}
             id={id}
@@ -23,6 +28,11 @@ export default function Home({ teams }) {
           />
         ))}
       </main>
+      <Banner />
+      <LastFooter />
+      <SignIn />
+      <Footer />
+      <FinalFooter />
     </div>
   );
 }

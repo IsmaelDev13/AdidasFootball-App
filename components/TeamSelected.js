@@ -3,7 +3,6 @@ import axios from "axios";
 import DefenderPlayers from "./DefenderPlayers";
 import { useSelector } from "react-redux";
 import { selectPlayers } from "../slices/playerSlice";
-import FinalTeam from "./FinalTeam";
 import GoalkeeperPlayers from "./GoalkeeperPlayers";
 import MidfielderPlayers from "./MidfieldPlayers";
 import AttackerPlayers from "./AttackerPlayers";
@@ -12,14 +11,15 @@ import { useDispatch } from "react-redux";
 import { removeTeam } from "../slices/teamSlice";
 import SideTeam from "./SideTeam";
 
-function TeamSelected({ id, name, imageUrl, year, setShowTeam }) {
-  const players = useSelector(selectPlayers);
+function TeamSelected({ id, name, imageUrl, year, players }) {
+  // const players = useSelector(selectPlayers);
+  // console.log(players);
+
   const [uniqueTeams, setUniqueTeams] = useState([]);
   const dispatch = useDispatch();
   const deleteTeam = () => {
     dispatch(removeTeam({ id }));
   };
-  console.log(uniqueTeams);
   useEffect(() => {
     axios
       .get(`https://api.football-data.org/v2/teams/${id}`, {
@@ -34,9 +34,17 @@ function TeamSelected({ id, name, imageUrl, year, setShowTeam }) {
       })
       .catch((err) => console.error(err));
   }, []);
+
+  // useEffect(() => {
+  //   setUniqueTeams(players);
+  // }, []);
   return (
-    <div className="flex items-center p-5 border-b-2 hover:shadow-xl  space-x-10 relative ">
-      <img src={imageUrl} alt="" className="h-48 w-48 object-contain " />
+    <div className="flex flex-col lg:flex-row  items-center p-5 border-b-2 hover:shadow-xl overflow-x-hidden  space-x-10 relative  ">
+      <img
+        src={imageUrl}
+        alt=""
+        className="h-48 w-48 object-contain  border-2 shadow-md rounded-3xl bg-gray-50 transform transition-all duration-150 ease-in-out hover:animate-bounce "
+      />
       <div className="p-2">
         <p className="font-semibold">{name}</p>
         <p className="text-gray-500">{year}</p>
@@ -57,7 +65,6 @@ function TeamSelected({ id, name, imageUrl, year, setShowTeam }) {
               name={name}
               country={nationality}
               position={position}
-              setShowTeam={setShowTeam}
             />
           ))}
       </div>
@@ -108,22 +115,25 @@ function TeamSelected({ id, name, imageUrl, year, setShowTeam }) {
               position={position}
             />
           ))}
+        <SideTeam />
       </div>
-      <div>
-        {players.map((player) => (
-          <SideTeam
-            key={player.id}
-            id={player.id}
-            name={player.name}
-            country={player.country}
-            position={player.position}
-            setShowTeam={setShowTeam}
-          />
-        ))}
-      </div>
-      {/* <div onClick={() => setShowFinalTeam(false)} /> */}
     </div>
   );
 }
 
 export default TeamSelected;
+
+// export async function getServerSideProps(context) {
+//   const players = await fetch(`https://api.football-data.org/v2/teams/${id}`, {
+//     method: "GET",
+//     headers: {
+//       "X-Auth-Token": "9ce7d2cc680e4834a6f05f2d9ddb02c2",
+//     },
+//   }).then((res) => res.json());
+
+//   return {
+//     props: {
+//       players,
+//     },
+//   };
+// }
